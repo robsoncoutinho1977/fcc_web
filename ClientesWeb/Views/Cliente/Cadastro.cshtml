@@ -1,0 +1,209 @@
+﻿@model ClientesWeb.Models.ClienteModel
+
+@if (ViewBag.Mensagem != "")
+{
+    <div class="modal fade" id="Modal_Erro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">@ViewBag.MensagemTitulo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @ViewBag.Mensagem
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#Modal_Erro').modal('toggle');
+    </script>
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2" style="color: #6c757d;">Home > Cadastro de Usuário</h1>
+    </div>
+
+    <div class="container">
+
+        <div id="cards" class="">
+            <div class="container-fluid mx-auto d-none d-md-block my-3">
+                <div class="row justify-content-center">
+
+                    <div class="col-12 col-lg-12 d-flex mb-3">
+                        <form action="/Cliente/Cadastro" id="formCadastro" name="formCadastro" method="post">
+                            <div class="form-row">
+
+                                <div class="form-group col-md-12"></div>
+                                <div class="form-group col-md-12">
+                                    <h5 class="font-italic" style="border-bottom: dashed; padding: 5px;color: #6c757d;">Dados Cadastrais</h5>
+                                </div>
+
+                                <div class="form-group col-md-8">
+                                    <label class="font-weight-normal">Nome*</label>
+                                    <input asp-for="Nome" id="Nome" name="Nome" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="font-weight-normal">CPF* <span style="color: #d50101; font-weight: bold; background-color: #ffeb05;"></span></label>
+                                    <input asp-for="CPF" id="CPF" name="CPF" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="font-weight-normal">RG* <span style="color: #d50101; font-weight: bold; background-color: #ffeb05;"></span></label>
+                                    <input asp-for="RG" id="RG" name="RG" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="font-weight-normal">Data de Expedição* <span style="color: #d50101; font-weight: bold; background-color: #ffeb05;"></span></label>
+                                    <input asp-for="DataExpedicao" id="DataExpedicao" name="DataExpedicao" type="date" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="font-weight-normal">Órgão de Expedição* <span style="color: #d50101; font-weight: bold; background-color: #ffeb05;"></span></label>
+                                    <input asp-for="OrgaoExpedicao" id="OrgaoExpedicao" name="OrgaoExpedicao" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="font-weight-normal">UF* <span style="color: #d50101; font-weight: bold; background-color: #ffeb05;"></span></label>
+                                    <input asp-for="UF" id="UF" name="UF" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="font-weight-normal">Data de Nascimento* <span style="color: #d50101; font-weight: bold; background-color: #ffeb05;"></span></label>
+                                    <input asp-for="DataNascimento" id="DataNascimento" name="DataNascimento" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="font-weight-normal">Sexo* <span style="color: #d50101; font-weight: bold; background-color: #ffeb05;"></span></label>
+                                    <input asp-for="Sexo" id="Sexo" name="Sexo" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="font-weight-normal">Estado Civil* <span style="color: #d50101; font-weight: bold; background-color: #ffeb05;"></span></label>
+                                    <input asp-for="EstadoCivil" id="EstadoCivil" name="EstadoCivil" type="text" class="form-control" required />
+                                </div>
+
+                                <div class="form-group col-md-12"></div>
+                                <div class="form-group col-md-12">
+                                    <h5 class="font-italic" style="border-bottom: dashed; padding: 5px;color: #6c757d;">Dados de Localização</h5>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-sm-10 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="font-weight-normal">CEP *</label>
+                                            <input asp-for="Endereco.CEP" id="Endereco.CEP" name="Endereco.CEP" type="number" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="font-weight-normal" for="btnConsultar"></label>
+                                        <button type="button" class="btn btn-primary" id="btnConsultar" name="btnConsultar" onclick="javascript:ClickBuscaCep('');"><span class="material-icons md-18" style="cursor: pointer;" title="Buscar Cep">search</span></button>&nbsp;<img id="loading" name="loading" style="visibility: hidden; width: 30px;" src="~/imagens/loading.gif" />
+                                    </div>
+                                    <div class="col-sm-2 col-lg-4"></div>
+                                </div>
+
+                                <div class="form-group col-md-9">
+                                    <label class="font-weight-normal">Logradouro *</label>
+                                    <input asp-for="Endereco.Logradouro" id="Endereco.Logradouro" name="Endereco.Logradouro" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="font-weight-normal" for="telefone">Número *</label>
+                                    <input asp-for="Endereco.Numero" id="Endereco.Numero" name="Endereco.Numero" type="number" class="form-control" required />
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="font-weight-normal">Bairro *</label>
+                                    <input asp-for="Endereco.Bairro" id="Endereco.Bairro" name="Endereco.Bairro" type="text" class="form-control" required />
+                                </div>
+                                <div class="form-group col-md-9">
+                                    <label class="font-weight-normal" for="telefone">Complemento</label>
+                                    <input asp-for="Endereco.Complemento" id="Endereco.Complemento" name="Endereco.Complemento" type="text" class="form-control" />
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label class="font-weight-normal">UF *</label>
+                                    <input asp-for="Endereco.UF" id="Endereco.UF" name="Endereco.UF" type="text" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="font-weight-normal">Cidade *</label>
+                                    <select asp-for="Endereco.Cidade" id="Endereco.Cidade" name="Endereco.Cidade" class="form-control" required>
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="font-weight-normal" id="lbsenha" style="display:none;">Login *</label>
+                                    <input asp-for="login" id="login" name="login" type="text" class="form-control" style="display:none;" required />
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="font-weight-normal" id="lbsenha" style="display:none;">Senha *</label>
+                                    <input asp-for="senha" id="senha" name="senha" type="password" class="form-control" style="display:none;" required />
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                @Html.ActionLink("Voltar", "Index", "Cliente", null, new { @class = "btn btn-success mt-5" })
+                                <button type="submit" class="btn text-light text-uppercase font-weight-bold mt-5"
+                                        style="color: whitesmoke; background-color: #64a1da; margin-left:10px;">
+                                    CADASTRAR
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <footer class="footer mt-auto py-3">
+            <div class="container">
+                <small class="form-text text-center text-muted mt-2">Desenvolvido por Robson de Oliveira</small>
+            </div>
+        </footer>
+    </div>
+</main>
+
+<script type="text/javascript">
+    function ClickBuscaCep(form) {
+        if ($('[name="' + form + 'Endereco.CEP"]').val() != "" && $('[name="' + form + 'Endereco.CEP"]').val().length >= 8) {
+            $('#btnConsultar').prop('disabled', true);
+            $('#loading').css("visibility", "visible");
+            var txtCep = $('[name="' + form + 'Endereco.CEP"]').val();
+
+            $.ajax({
+                url: '/Cliente/BuscaCep',
+                dataType: 'json',
+                type: 'POST',
+                data: { cep: txtCep },
+                success: function (dados) {
+                    $(dados).each(function (i) {
+                        var _status = dados[0].status;
+                        var _mensagem = dados[0].mensagem;
+                        if (_status == "1") {
+                            $('[name="' + form + 'Endereco.Logradouro"]').val(dados[0].logradouro);
+                            $('[name="' + form + 'Endereco.Bairro"]').val(dados[0].bairro);
+                            $('[name="' + form + 'Endereco.UF"]').val(dados[0].bairro);
+                            $('[name="' + form + 'Endereco.Cidade"]').val(dados[0].bairro);
+
+
+                        } else {
+                            $('[name="' + form + 'Endereco.Logradouro"]').val('');
+                            $('[name="' + form + 'Endereco.Bairro"]').val('');
+                            $('[name="' + form + 'Endereco.UF"]').val('');
+                            $('[name="' + form + 'Endereco.Cidade"]').val('');
+                            alert(_mensagem);
+                        }
+                    });
+                },
+                error: function (ex3) {
+                    alert("Erro ao localizar Cep. Detalhes do erro: " + ex3);
+                }
+            });
+        } else {
+            $('[name="' + form + 'Endereco.Logradouro"]').val('');
+            $('[name="' + form + 'Endereco.Bairro"]').val('');
+            $('[name="' + form + 'Endereco.UF"]').val('');
+            $('[name="' + form + 'Endereco.Cidade"]').val('');
+        }
+    }
+
+</script>

@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ClientesWeb.Models.ClienteModel>
+
+@{ Layout = "~/Views/Shared/_LayoutHome.cshtml"; }
+
+@if (ViewBag.Mensagem != "")
+{
+    <div class="modal fade" id="Modal_Erro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">@ViewBag.MensagemTitulo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @ViewBag.Mensagem
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#Modal_Erro').modal('toggle');
+    </script>
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="container">
+        <div id="cards" class="">
+            <h3 class="font-weight-bold text-left my-3" style="color: #64a1da;">Cadastro(s) de Cliente(s)</h3>
+
+            <div class="form-inline" style="margin-bottom: 10px;">
+                <a href="#" onclick="javascript: history.go(-1);" class="btn btn-success btn-sm active" style="margin-right: 10px;" title="Clique para voltar">Voltar</a>
+                <a href="/Cliente/Cadastro" class="btn btn-primary btn-sm active" title="Clique para cadastrar um novo cliente">Novo Cliente</a>
+            </div>
+
+            @if (Model == null)
+            {
+                <table style="margin-top:20px; width: 100%; text-align: center;"><tbody><tr><td>Nenhum Cliente Cadastrado!</td></tr></tbody></table>
+            }
+            else
+            {
+                <table id="table_id" class="table table-sm table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nome
+                            </th>
+                            <th>
+                                CPF
+                            </th>
+                            <th>
+                                Cidade
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                            </th>
+                            <th class="no-sort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="vertical-align: middle; text-transform: uppercase;">
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CPF)
+                                </td>
+                                <td style="vertical-align: middle; text-transform: uppercase;">
+                                    @Html.DisplayFor(modelItem => item.Endereco.Cidade)
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    @Html.DisplayFor(modelItem => item.Endereco.UF)
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-row">
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Ações
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="/Cliente/Detalhes/@item.ID"><span class="material-icons md-18" style="cursor: pointer;" title="Detalhes">description</span> Detalhes</a>
+                                                <a class="dropdown-item" href="/Cliente/Edita/@item.ID"><span class="material-icons md-18" style="cursor: pointer;" title="Editar">edit</span> Editar</a>
+                                                <a class="dropdown-item" href="/Cliente/Deleta/@item.ID"><span class="material-icons md-18" style="cursor: pointer;" title="Excluir">delete_forever</span> Excluir</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+
+    </div>
+</main>

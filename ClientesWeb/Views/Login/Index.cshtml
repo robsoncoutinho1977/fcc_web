@@ -1,0 +1,64 @@
+﻿@if (ViewBag.Mensagem != "")
+{
+    <div class="modal fade" id="Modal_Erro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">@ViewBag.MensagemTitulo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @ViewBag.Mensagem
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#Modal_Erro').modal('toggle');
+    </script>
+}
+
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <title>FCC - Aplicacao Teste</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        @using (@Html.BeginForm("Logar", "Login", FormMethod.Post, new { @id = "form" }))
+        {
+            <div class="form-group">
+                <div class="input-group mt-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="color: whitesmoke; background-color: #64a1da;"><i class="fas fa-user"></i></span>
+                    </div>
+                    <label for="cpf"></label>
+                    <input type="text" class="form-control" name="login" id="login" aria-describedby="login" placeholder="Login">
+                </div>
+                <div class="form-group">
+                    <div class="input-group mt-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="color: whitesmoke; background-color: #64a1da;"><i class="fas fa-lock"></i></span>
+                        </div>
+                        <label for="senha"></label>
+                        <input type="password" class="form-control" name="senha" id="senha" aria-describedby="senha" placeholder="Senha">
+                    </div>
+
+                </div>
+                <div class="">
+                    <button class="btn text-light text-uppercase font-weight-bold d-block w-100 mx-auto" style="color: whitesmoke; background-color: #64a1da;">Entrar</button>
+                    <small class="form-text text-center text-muted">Desenvolvido por Robson de Oliveira</small>
+                </div>
+            </div>
+        }
+    </body>
+</html>
